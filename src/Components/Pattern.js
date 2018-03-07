@@ -8,11 +8,16 @@ const styling = {
   borderRadius: '5px',
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  cursor: 'move'
 };
 
 const Pattern = ({ name }) => {
-  return <div style={styling}>{name}</div>;
+  return (
+    <div id={name} style={styling}>
+      {name}
+    </div>
+  );
 };
 
 export default Pattern;

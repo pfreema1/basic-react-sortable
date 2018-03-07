@@ -1,5 +1,5 @@
 import React from 'react';
-import SongBuilderArea from './SongBuilderArea';
+import SongBuilderArea from '../Containers/SongBuilderArea';
 
 const styling = {
   height: '80vh',
@@ -13,7 +13,7 @@ const styling = {
 const SongWrapper = ({ songArr }) => {
   return (
     <div style={styling}>
-      <SongBuilderArea songArr={songArr} />
+      <SongBuilderArea />
     </div>
   );
 };

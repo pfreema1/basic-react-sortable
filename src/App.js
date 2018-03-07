@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import './App.css';
 import PatternsWrapper from './Components/PatternsWrapper';
 import SongWrapper from './Components/SongWrapper';
+import { Provider } from 'react-redux';
 
 const patternNameArr = [
   'Pattern1',
@@ -36,6 +37,23 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SONG_UPDATED': {
+      const { listIdArr } = action;
+      const { patternsArr } = state;
+
+      let newSongArr = listIdArr.map(listId => {
+        let patternToBeAdded = patternsArr.find(pattern => {
+          return pattern.name === listId;
+        });
+
+        return patternToBeAdded;
+      });
+
+      return {
+        ...state,
+        songArr: newSongArr
+      };
+    }
     default:
       return state;
   }
@@ -48,13 +66,14 @@ class App extends Component {
   render() {
     let state = store.getState();
     let patterns = state.patternsArr;
-    let songArr = state.songArr;
 
     return (
-      <div>
-        <PatternsWrapper patterns={patterns} />
-        <SongWrapper songArr={songArr} />
-      </div>
+      <Provider store={store}>
+        <div>
+          <PatternsWrapper patterns={patterns} />
+          <SongWrapper />
+        </div>
+      </Provider>
     );
   }
 }

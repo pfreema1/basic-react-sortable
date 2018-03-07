@@ -1,5 +1,6 @@
 import React from 'react';
 import Pattern from './Pattern';
+import ReactSortable from 'react-sortablejs';
 
 const styling = {
   height: '20vh',
@@ -12,9 +13,22 @@ const styling = {
 
 const PatternsWrapper = ({ patterns }) => {
   return (
-    <div style={styling}>
-      {patterns.map((pattern, index) => <Pattern name={pattern.name} />)}
-    </div>
+    <ReactSortable
+      options={{
+        animation: 150,
+        sort: false,
+        group: {
+          name: 'clone1',
+          pull: 'clone',
+          put: false
+        }
+      }}
+      style={styling}
+    >
+      {patterns.map((pattern, index) => (
+        <Pattern key={index} name={pattern.name} />
+      ))}
+    </ReactSortable>
   );
 };
 
